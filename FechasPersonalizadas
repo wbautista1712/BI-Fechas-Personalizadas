@@ -14,3 +14,43 @@ CALENDAR (DATE(2020,1,1), DATE(2023,12,31)),
 "Trimestre", "Q" & FORMAT ( [Date], "Q" ),
 "Año/trimestre", FORMAT ( [Date], "YYYY" ) & "/Q" & FORMAT ( [Date], "Q" )
 )
+
+
+// Otras variantes
+Calendario = CALENDAR(MIN(‘Ventas’[Fecha]);TODAY())
+
+Año = YEAR(‘Calendario’[Fecha])
+Mes = MONTH(‘Calendario’[Fecha])
+Día = DAY(‘Calendario’[Fecha])
+Semestre= ROUNDUP(‘Calendario’[Mes]/6;0)
+Cuatrimestre = ROUNDUP(‘Calendario’[Mes]/4;0)
+Trimestre = ROUNDUP(‘Calendario’[Mes]/3;0)
+Semana = WEEKNUM(‘Calendario'[Fecha])
+
+// Otra variante
+Calendario=Calendar(MIN(Ventas[Fecha]);Today())
+Año=YEAR(Calendario[Fecha])
+Mes=MONTH(Calendario[Fecha])
+Dia=DAY(Calendario[Fecha]) 
+FechaSk = Calendario[Año]*10000 + Calendario[Mes]*100 + Calendario[Dia]
+Semestre=ROUNDUP(Calendario[Mes]/6;0)
+Cuatrimestre=ROUNDUP(Calendario[Mes]/4;0)
+Trimestre=ROUNDUP(Calendario[Mes]/3;0)
+Bimestre=ROUNDUP(Calendario[Mes]/2;0)
+Semana = WEEKNUM(Calendario[Fecha])
+AñoMes = Calendario[Año] & FORMAT(Calendario[Fecha];"mm")
+DiaSemana=WEEKDAY(Calendario[Fecha])
+NbAño = Calendario[Año]
+NbSemestre = "S"&Calendario[Semestre]
+NbSemestreAño = Calendario[NbSemestre] & "/"  & RIGHT(Calendario[NbAño];2)
+NbCuatrimestre = "C"&Calendario[Cuatrimestre]
+NbCuatrimestreAño = Calendario[NbCuatrimestre] &"/" & RIGHT(Calendario[Año];2)
+NbTrimestre = "T"&Calendario[Trimestre]
+NbTrimestreAño = Calendario[NbTrimestre] & "/" & RIGHT(Calendario[Año];2)
+NbBimestre = "B" & Calendario[Bimestre]
+NbBimestreAño = Calendario[NbBimestre] &"/" & RIGHT(Calendario[Año];2)
+NbMes = Calendario[Fecha].[Mes]
+nbMes3L = left(Calendario[NbMes];3)
+NbDia = Calendario[Dia] & " " & Calendario[nbMes3L]
+NbSemana = "Sem " & Calendario[Semana] & "/" & RIGHT(Calendario[Año];2)
+NdDiaSemana = FORMAT(Calendario[Fecha];"dddd")
